@@ -1,0 +1,77 @@
+[gd_scene load_steps=11 format=3 uid="uid://dti7ds84lbrg0"]
+
+[ext_resource type="Texture2D" uid="uid://csaqme4jujhqx" path="res://Tilemaps/0x72_DungeonTilesetII_v1.7.png" id="1_g48qk"]
+[ext_resource type="Script" path="res://enemy(test).gd" id="1_inlji"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ugmc"]
+atlas = ExtResource("1_g48qk")
+region = Rect2(400, 272, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dr5uf"]
+atlas = ExtResource("1_g48qk")
+region = Rect2(416, 272, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cecoj"]
+atlas = ExtResource("1_g48qk")
+region = Rect2(432, 272, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gicxf"]
+atlas = ExtResource("1_g48qk")
+region = Rect2(448, 272, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k8sb8"]
+atlas = ExtResource("1_g48qk")
+region = Rect2(464, 272, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sx2th"]
+atlas = ExtResource("1_g48qk")
+region = Rect2(480, 272, 16, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cp07y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ugmc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dr5uf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cecoj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gicxf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k8sb8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sx2th")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bo0l4"]
+size = Vector2(11, 18)
+
+[node name="Enemy" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_inlji")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 3
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_cp07y")
+animation = &"walk"
+frame_progress = 0.849159
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 12)
+scale = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_bo0l4")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
